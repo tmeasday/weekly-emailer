@@ -9,9 +9,9 @@ require 'ostruct'
 
 
 # read email/password
-puts "Enter your harvest email:"
+STDERR.puts "Enter your harvest email:"
 email = STDIN.readline.strip
-puts "Password:"
+STDERR.puts "Password:"
 password = ''
 STDIN.noecho do
   password = STDIN.readline.strip
