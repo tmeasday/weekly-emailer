@@ -5,16 +5,22 @@
       <% users.each do |user| %>
         <th><%= user[:name] %></th>
       <% end %>
+      <th>TOTAL</th>
+      <th>TOTAL DAYS</th>
     </tr>
   </thead>
   
   <tbody>
     <% projects.each do |project| %>
       <tr>
-        <th><%= project[:client_name] + ' ' + project[:name] %></th>
+        <th><%= project[:client_name] + ' - ' + project[:name] %></th>
         <% users.each do |user| %>
-          <td><%= project_user_hours[project[:id]][user[:id]] %></td>
+          <td>
+            <%= '%.1f' % project_user_hours[project[:id]][user[:id]] %>
+          </td>
         <% end %>
+        <td><%= '%.1f' % project[:total] %></td>
+        <td><%= '%.1f' % (project[:total] / 8) %></td>
       </tr>
     <% end %>
   </tbody>

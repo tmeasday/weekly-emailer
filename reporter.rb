@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require './harvest.rb'
 require 'io/console'
 require 'json'
@@ -68,6 +70,16 @@ users.each do |user|
     project_id = entry_doc['day_entry']['project_id']
     project_user_hours[project_id][user[:id]] += entry_doc['day_entry']['hours']
   end
+end
+
+# filter out users that have done no hours
+users = users.select do |user|
+  project_user_hours.values.map { |hs| hs[user[:id]] }.reduce(:+) > 0
+end
+
+# add a total to each project
+projects.each do |project|
+  project[:total] = project_user_hours[project[:id]].values.reduce(:+)
 end
 
 # we have our data! Print:
