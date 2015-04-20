@@ -16,7 +16,8 @@
         <th><%= project[:client_name] + ' - ' + project[:name] %></th>
         <% users.each do |user| %>
           <td>
-            <%= '%.1f' % project_user_hours[project[:id]][user[:id]] %>
+            <% hours = project_user_hours[project[:id]][user[:id]] %>
+            <%= '%.1f' % hours if hours > 0 %>
           </td>
         <% end %>
         <td><%= '%.1f' % project[:total] %></td>

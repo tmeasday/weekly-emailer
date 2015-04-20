@@ -82,6 +82,9 @@ projects.each do |project|
   project[:total] = project_user_hours[project[:id]].values.reduce(:+)
 end
 
+# filter out projects that have done no hours
+projects = projects.select { |p| p[:total] > 0 }
+
 # we have our data! Print:
 
 # potentially slightly dodgy approach
